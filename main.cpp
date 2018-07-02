@@ -1,17 +1,14 @@
 #include "dialog.h"
 #include <QApplication>
-#include "chatunit.h"
+#include "chatunit/ChatUnit.h"
 
 int main(int argc, char *argv[])
 {
-//    QApplication a(argc, argv);
+    QApplication a(argc, argv);
 //    Dialog w;
 //    w.show();
 
-//    return a.exec();
-
     ChatUnit unit;
-    while (1) ;
 
-
+    return a.exec();
 }
