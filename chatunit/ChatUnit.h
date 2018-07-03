@@ -8,9 +8,11 @@
 
 #include <QtGlobal>
 #include "ChatServer.h"
+#include "ChatClient.h"
 
 class ChatUnit:public QObject {
     ChatServer *server;
+    ChatClient *client;
 public:
     ChatUnit(QObject* parent=0);
     static const quint16 PORT;

@@ -12,10 +12,14 @@
 
 
 class GetClientsRequest:public Request {
+private:
+    QString name;
 public:
     explicit GetClientsRequest();
 
+
 private:
+
     void writeData(QXmlStreamWriter *writer) const override;
     void readData(QXmlStreamReader *reader) override;
 };
