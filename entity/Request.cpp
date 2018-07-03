@@ -1,12 +1,8 @@
-//
-// Created by Artur Mamedov on 03.07.2018.
-//
-
-#include <QXmlStreamWriter>
 #include "Request.h"
 #include "requests/GetClientsRequest.h"
 
-Request::Request(const QString &type, QObject *parent) : QObject(parent), type(type) {}
+
+Request::Request(const QString &type) : type(type) {}
 
 const QString &Request::getType() const {
     return type;
@@ -34,19 +30,18 @@ const QString Request::toXML() const {
 
     streamWriter.writeEndElement();
 
-
     return data;
 }
 
 
-Request *Request::createRequest(const QString& xml, QObject *parent) {
+Request *Request::createRequest(const QString& xml) {
     QXmlStreamReader reader(xml);
     Request *request = nullptr;
     if (!reader.readNextStartElement()) return nullptr;
     if (reader.name() == "request") {
         while (reader.readNextStartElement()) {
             if (reader.name() == "type")
-                request = Request::createInstance(reader.readElementText(), parent);
+                request = Request::createInstance(reader.readElementText());
             if (reader.name() == "data") {
                 if (request == nullptr) return nullptr;
                 request->readData(&reader);
@@ -57,8 +52,9 @@ Request *Request::createRequest(const QString& xml, QObject *parent) {
     return nullptr;
 }
 
-Request *Request::createInstance(QString type, QObject *pObject) {
-    if (type == "GetClients") return new GetClientsRequest(pObject);
+Request *Request::createInstance(QString type) {
+    if (type == "GetClients") return new GetClientsRequest();
+
     return nullptr;
 }
 

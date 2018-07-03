@@ -4,7 +4,7 @@
 
 #include "GetClientsRequest.h"
 
-GetClientsRequest::GetClientsRequest(QObject *parent) : Request("GetClients", parent) {}
+GetClientsRequest::GetClientsRequest() : Request("GetClients") {}
 
 void GetClientsRequest::writeData(QXmlStreamWriter *writer) const {
 

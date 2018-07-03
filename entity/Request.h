@@ -8,12 +8,14 @@
 
 #include <QString>
 #include <QObject>
+#include <QXmlStreamWriter>
+#include <QXmlStreamReader>
 
-class Request:QObject {
-    Q_OBJECT
+
+class Request{
     QString type;
 public:
-    Request( const QString &type,QObject *parent=0);
+    Request(const QString &type);
 
     const QString &getType() const;
 
@@ -22,14 +24,14 @@ public:
     const QString toXML() const;
 
 
-    static Request* createRequest(const QString& xml,QObject *parent);
+    static Request* createRequest(const QString& xml);
 
 
 protected:
     virtual void writeData(QXmlStreamWriter* writer) const = 0;
     virtual void readData(QXmlStreamReader* reader) = 0;
 
-    static Request *createInstance(QString type, QObject *pObject);
+    static Request *createInstance(QString type);
 };
 
 

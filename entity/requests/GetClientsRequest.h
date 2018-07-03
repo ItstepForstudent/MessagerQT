@@ -7,11 +7,13 @@
 
 
 #include <QXmlStreamWriter>
+#include <QXmlStreamReader>
 #include "../Request.h"
 
-class GetClientsRequest: Request {
+
+class GetClientsRequest:public Request {
 public:
-    GetClientsRequest(QObject *parent);
+    explicit GetClientsRequest();
 
 private:
     void writeData(QXmlStreamWriter *writer) const override;
