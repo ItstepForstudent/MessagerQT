@@ -7,10 +7,12 @@
 
 #include <QTcpServer>
 #include <QTcpSocket>
+#include "../entity/Client.h"
 
 class ChatServer :QObject {
     Q_OBJECT
     QTcpServer *tcpServer;
+    QList<Client*> clients;
 public:
     ChatServer(QObject* parent=0);
 public slots:

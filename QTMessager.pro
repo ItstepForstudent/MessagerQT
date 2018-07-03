@@ -27,11 +27,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         dialog.cpp \
-    chatunit.cpp
+    chatunit/ChatUnit.cpp
 
 HEADERS += \
         dialog.h \
-    chatunit.h
+    /chatunit/ChatUnit.h
 
 FORMS += \
         dialog.ui

@@ -17,6 +17,10 @@ ChatServer::ChatServer(QObject *parent) : QObject(parent) {
 void ChatServer::inputConnecting() {
     QTcpSocket *socket = tcpServer->nextPendingConnection();
     QHostAddress addr = socket->peerAddress();
+
+
+
+
    // clients.append(addr);
 
 
