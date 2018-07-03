@@ -13,3 +13,4 @@ void GetClientsRequest::writeData(QXmlStreamWriter *writer) const {
 void GetClientsRequest::readData(QXmlStreamReader *reader) {
 
 }
+

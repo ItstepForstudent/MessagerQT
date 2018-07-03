@@ -15,7 +15,6 @@ public:
 
 private:
     void writeData(QXmlStreamWriter *writer) const override;
-
     void readData(QXmlStreamReader *reader) override;
 };
 

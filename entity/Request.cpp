@@ -49,16 +49,12 @@ Request *Request::createRequest(const QString& xml, QObject *parent) {
                 request = Request::createInstance(reader.readElementText(), parent);
             if (reader.name() == "data") {
                 if (request == nullptr) return nullptr;
-                request->parse(&reader);
+                request->readData(&reader);
             } else
                 reader.skipCurrentElement();
         }
-    } else
-        reader.raiseError(QObject::tr("Incorrect data"));
-}
-
-
-return nullptr;
+    }
+    return nullptr;
 }
 
 Request *Request::createInstance(QString type, QObject *pObject) {

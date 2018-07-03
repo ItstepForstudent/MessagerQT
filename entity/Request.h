@@ -12,7 +12,6 @@
 class Request:QObject {
     Q_OBJECT
     QString type;
-    virtual void parse(QXmlStreamReader*) = 0;
 public:
     Request( const QString &type,QObject *parent=0);
 
