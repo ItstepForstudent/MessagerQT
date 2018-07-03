@@ -2,18 +2,17 @@
 // Created by Artur Mamedov on 03.07.2018.
 //
 
-#ifndef QTMESSAGER_REQUEST_H
-#define QTMESSAGER_REQUEST_H
+#ifndef QTMESSAGER_RESPONSE_H
+#define QTMESSAGER_RESPONSE_H
 
 
-#include <QString>
 #include <QObject>
+#include <QXmlStreamWriter>
 
-class Request:QObject {
-    Q_OBJECT
+class Response: QObject {
     QString type;
 public:
-    Request( const QString &type,QObject *parent=0);
+    Response( const QString &type,QObject *parent=0);
 
     const QString &getType() const;
 
@@ -22,15 +21,15 @@ public:
     const QString toXML() const;
 
 
-    static Request* createRequest(const QString& xml,QObject *parent);
+    static Response* createResponse(const QString& xml,QObject *parent);
 
 
 protected:
     virtual void writeData(QXmlStreamWriter* writer) const = 0;
     virtual void readData(QXmlStreamReader* reader) = 0;
 
-    static Request *createInstance(QString type, QObject *pObject);
+    static Response *createInstance(QString type, QObject *pObject);
 };
 
 
-#endif //QTMESSAGER_REQUEST_H
+#endif //QTMESSAGER_RESPONSE_H
