@@ -9,7 +9,7 @@
 #include <QObject>
 #include <QXmlStreamWriter>
 
-class Response: QObject {
+class Response{
     QString type;
 public:
     Response( const QString &type);

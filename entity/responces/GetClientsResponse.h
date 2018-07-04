@@ -9,11 +9,16 @@
 #include "../Response.h"
 #include "../Client.h"
 
-class GetClientsResponse: Response {
+class GetClientsResponse: public Response {
     QList<std::shared_ptr<Client>> clients;
 public:
     void addClient(std::shared_ptr<Client> client);
     GetClientsResponse();
+
+protected:
+    void readData(QXmlStreamReader *reader) override;
+
+    void writeData(QXmlStreamWriter *writer) const override;
 
 };
 

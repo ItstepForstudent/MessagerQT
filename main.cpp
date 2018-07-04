@@ -16,9 +16,10 @@ void testParseXMLRequest(){
 
 void testParseXmlResponse(){
     GetClientsResponse response;
-//    response.addClient(
-//            std::shared_ptr<>
-//            );
+    response.addClient(std::shared_ptr<Client>(new Client("vasia",QHostAddress("127.0.0.1"))));
+    response.addClient(std::shared_ptr<Client>(new Client("petia",QHostAddress("127.0.0.2"))));
+    response.addClient(std::shared_ptr<Client>(new Client("ivan",QHostAddress("127.0.0.3"))));
+    qDebug()<<response.toXML();
 }
 
 
