@@ -6,7 +6,24 @@
 #define QTMESSAGER_CHATCLIENT_H
 
 
-class ChatClient {
+#include <QtNetwork/QTcpSocket>
+#include <QTcpServer>
+#include <QTcpSocket>
+class ChatClient : public QWidget{
+    Q_OBJECT
+private:
+    QTcpSocket* m_pTcpSocket;
+    qint16 m_nNextBlockSize;
+
+public:
+    ChatClient(const QString& strHost, int nPort);
+
+private slots:
+    void SlotReadyRead(    );
+    void slotError (QAbstractSocket:: SocketError);
+    void slotSendToserver(  );
+    void slotConnected ( );
+
 
 };
 

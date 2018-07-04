@@ -1,5 +1,6 @@
 #include "dialog.h"
 #include <QApplication>
+#include <memory>
 #include "chatunit/ChatUnit.h"
 #include "entity/Request.h"
 #include "entity/requests/GetClientsRequest.h"

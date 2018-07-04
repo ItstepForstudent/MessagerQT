@@ -2,3 +2,5 @@
 build*/*
 *.pro.user./*
 cmake*/*
+.idea/
+CMakeLists.txt
