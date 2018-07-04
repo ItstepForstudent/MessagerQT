@@ -6,7 +6,14 @@
 #define QTMESSAGER_GETCLIENTSRESPONSE_H
 
 
-class GetClientsResponse {
+#include "../Response.h"
+#include "../Client.h"
+
+class GetClientsResponse: Response {
+    QList<std::shared_ptr<Client>> clients;
+public:
+    void addClient(std::shared_ptr<Client> client);
+    GetClientsResponse();
 
 };
 

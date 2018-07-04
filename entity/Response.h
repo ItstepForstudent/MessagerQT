@@ -12,7 +12,7 @@
 class Response: QObject {
     QString type;
 public:
-    Response( const QString &type,QObject *parent=0);
+    Response( const QString &type);
 
     const QString &getType() const;
 
@@ -21,14 +21,15 @@ public:
     const QString toXML() const;
 
 
-    static Response* createResponse(const QString& xml,QObject *parent);
+    static std::shared_ptr<Response> createResponse(const QString& xml);
 
+    virtual ~Response()= default;
 
 protected:
     virtual void writeData(QXmlStreamWriter* writer) const = 0;
     virtual void readData(QXmlStreamReader* reader) = 0;
 
-    static Response *createInstance(QString type, QObject *pObject);
+    static std::shared_ptr<Response> createInstance(QString type);
 };
 
 

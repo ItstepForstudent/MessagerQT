@@ -1,16 +1,10 @@
 #include "Request.h"
+#include <QDebug>
 #include "requests/GetClientsRequest.h"
 
 
-Request::Request(const QString &type) : type(type) {}
 
-const QString &Request::getType() const {
-    return type;
-}
 
-void Request::setType(const QString &type) {
-    Request::type = type;
-}
 
 const QString Request::toXML() const {
     QString data;
@@ -33,28 +27,34 @@ const QString Request::toXML() const {
     return data;
 }
 
-
-Request *Request::createRequest(const QString& xml) {
+std::shared_ptr<Request> Request::createRequest(const QString &xml) {
     QXmlStreamReader reader(xml);
-    Request *request = nullptr;
-    if (!reader.readNextStartElement()) return nullptr;
+    std::shared_ptr<Request> request;
+    if (!reader.readNextStartElement()) return std::shared_ptr<Request>(nullptr);
     if (reader.name() == "request") {
         while (reader.readNextStartElement()) {
             if (reader.name() == "type")
                 request = Request::createInstance(reader.readElementText());
-            if (reader.name() == "data") {
-                if (request == nullptr) return nullptr;
+            else if (reader.name() == "data") {
+                if (request == nullptr) return std::shared_ptr<Request>(nullptr);
                 request->readData(&reader);
             } else
                 reader.skipCurrentElement();
         }
     }
+    return request;
+}
+
+std::shared_ptr<Request> Request::createInstance(QString type) {
+    if (type == "GetClients") return std::shared_ptr<Request>(new GetClientsRequest());
     return nullptr;
 }
 
-Request *Request::createInstance(QString type) {
-    if (type == "GetClients") return new GetClientsRequest();
+const QString &Request::getType() const { return type; }
+void Request::setType(const QString &type) { Request::type = type; }
 
-    return nullptr;
+Request::Request(const QString &type):type(type) {
+
 }
+
 

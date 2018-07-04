@@ -10,13 +10,12 @@
 #include <QHostAddress>
 #include <utility>
 
-class Client: QObject {
-    Q_OBJECT
+class Client{
     QString name;
     QHostAddress address;
 public:
-    Client(QObject *parent, QString name, const QHostAddress &address)
-            : QObject(parent), name(std::move(name)), address(address) {}
+    Client(QString name, const QHostAddress &address)
+            :  name(std::move(name)), address(address) {}
 
     const QString &getName() const {
         return name;

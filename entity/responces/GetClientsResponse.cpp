@@ -3,3 +3,11 @@
 //
 
 #include "GetClientsResponse.h"
+
+GetClientsResponse::GetClientsResponse() : Response("GetClients") {}
+
+void GetClientsResponse::addClient(std::shared_ptr<Client> client) {
+    this->clients.append(client);
+}
+
+

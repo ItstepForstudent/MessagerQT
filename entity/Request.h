@@ -12,26 +12,24 @@
 #include <QXmlStreamReader>
 
 
+
 class Request{
     QString type;
 public:
-    Request(const QString &type);
-
     const QString &getType() const;
-
     void setType(const QString &type);
 
+public:
+    explicit Request(const QString &type);
+    static std::shared_ptr<Request> createRequest(const QString& xml);
     const QString toXML() const;
-
-
-    static Request* createRequest(const QString& xml);
-
+    virtual ~Request()= default;
 
 protected:
     virtual void writeData(QXmlStreamWriter* writer) const = 0;
     virtual void readData(QXmlStreamReader* reader) = 0;
 
-    static Request *createInstance(QString type);
+    static std::shared_ptr<Request> createInstance(QString type);
 };
 
 

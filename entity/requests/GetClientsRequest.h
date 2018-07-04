@@ -17,9 +17,10 @@ private:
 public:
     explicit GetClientsRequest();
 
+    const QString &getName() const;
+    void setName(const QString &name);
 
 private:
-
     void writeData(QXmlStreamWriter *writer) const override;
     void readData(QXmlStreamReader *reader) override;
 };
