@@ -17,6 +17,7 @@ public:
     ChatServer(QObject* parent=0);
 public slots:
     void inputConnecting();
+    void readingClient();
 };
 
 

@@ -3,7 +3,7 @@
 //
 
 #include "Response.h"
-
+#include "responces/GetClientsResponse.h"
 Response::Response(const QString &type) :type(type){
 
 }
@@ -41,7 +41,7 @@ std::shared_ptr<Response> Response::createResponse(const QString &xml) {
     QXmlStreamReader reader(xml);
     std::shared_ptr<Response> response;
     if (!reader.readNextStartElement()) return std::shared_ptr<Response>(nullptr);
-    if (reader.name() == "request") {
+    if (reader.name() == "response") {
         while (reader.readNextStartElement()) {
             if (reader.name() == "type")
                 response = Response::createInstance(reader.readElementText());
@@ -56,7 +56,8 @@ std::shared_ptr<Response> Response::createResponse(const QString &xml) {
 }
 
 std::shared_ptr<Response> Response::createInstance(QString type) {
-    if(type == "")
+    if(type == "GetClients")
+        return std::shared_ptr<Response>(new GetClientsResponse());
     return std::shared_ptr<Response>();
 }
 

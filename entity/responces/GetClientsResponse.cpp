@@ -22,6 +22,37 @@ void GetClientsResponse::writeData(QXmlStreamWriter *writer) const {
 }
 
 void GetClientsResponse::readData(QXmlStreamReader *reader) {
+    if(reader->readNextStartElement()){
+        if(reader->name() == "clients")
+            while(reader->readNextStartElement()){
+                if(reader->name() == "client"){
+                    QString name,addr;
+                    while(reader->readNextStartElement()){
+                        if(reader->name() == "name"){
+                            name = reader->readElementText();
+                        } else if(reader->name() == "addr"){
+                            addr = reader->readElementText();
+                        }
+                        else
+                            reader->skipCurrentElement();
+                    }
+                    if(name!=""&&addr!=""){
+                        this->clients.append(std::shared_ptr<Client>(new Client(name,QHostAddress(addr))));
+                    }
+
+                }
+                else
+                    reader->skipCurrentElement();
+            }
+
+        else
+            reader->skipCurrentElement();
+    }
+
+
+
+
+
 
 }
 
