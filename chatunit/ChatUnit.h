@@ -11,11 +11,14 @@
 #include "ChatClient.h"
 
 class ChatUnit:public QObject {
+    Q_OBJECT
     ChatServer *server;
     ChatClient *client;
 public:
     ChatUnit(QObject* parent=0);
     static const quint16 PORT;
+private slots:
+    void recognizeRequest(std::shared_ptr<Request>,std::shared_ptr<Response>&);
 };
 
 

@@ -59,7 +59,11 @@ void ChatServer::readingClient() {
    // qDebug()<<data;
 
     std::shared_ptr<Request> request = Request::createRequest(data);
-    qDebug()<<request->getType();
+    std::shared_ptr<Response> response = nullptr;
+    incomingRequest(request,response);
+
+
+    
 
 
 

@@ -34,7 +34,7 @@ set(SOURCE_FILES
         entity/Response.h
         chatunit/ChatClient.cpp
         chatunit/ChatClient.h
-        )
+        request_executors/RequestExecutor.cpp request_executors/RequestExecutor.h)
 add_executable(QTMessager ${SOURCE_FILES})
 
 target_link_libraries(${PROJECTNAME} Qt5::Widgets)

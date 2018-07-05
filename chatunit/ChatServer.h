@@ -8,13 +8,19 @@
 #include <QTcpServer>
 #include <QTcpSocket>
 #include "../entity/Client.h"
+#include "../entity/Request.h"
+#include "../entity/Response.h"
 
-class ChatServer :QObject {
+class ChatServer :public QObject {
     Q_OBJECT
     QTcpServer *tcpServer;
     QList<Client*> clients;
 public:
     ChatServer(QObject* parent=0);
+
+signals:
+    void incomingRequest(std::shared_ptr<Request>,std::shared_ptr<Response>&);
+
 public slots:
     void inputConnecting();
     void readingClient();
