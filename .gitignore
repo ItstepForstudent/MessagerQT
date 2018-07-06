@@ -2,4 +2,4 @@
 build*/*
 *.pro.user./*
 cmake*/*
-CMakeList.txt
+CMakeLists.txt

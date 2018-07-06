@@ -3,10 +3,7 @@
 #include "requests/GetClientsRequest.h"
 
 
-
-
-
-const QString Request::toXML() const {
+const QString requests::Request::toXML() const {
     QString data;
     QXmlStreamWriter streamWriter(&data);
     streamWriter.setAutoFormatting(false);
@@ -27,16 +24,16 @@ const QString Request::toXML() const {
     return data;
 }
 
-std::shared_ptr<Request> Request::createRequest(const QString &xml) {
+std::shared_ptr<requests::Request> requests::Request::fromXML(const QString &xml) {
     QXmlStreamReader reader(xml);
     std::shared_ptr<Request> request;
     if (!reader.readNextStartElement()) return std::shared_ptr<Request>(nullptr);
     if (reader.name() == "request") {
         while (reader.readNextStartElement()) {
             if (reader.name() == "type")
-                request = Request::createInstance(reader.readElementText());
+                request = requests::Request::createInstance(reader.readElementText());
             else if (reader.name() == "data") {
-                if (request == nullptr) return std::shared_ptr<Request>(nullptr);
+                if (request == nullptr) return std::shared_ptr<requests::Request>(nullptr);
                 request->readData(&reader);
             } else
                 reader.skipCurrentElement();
@@ -45,15 +42,16 @@ std::shared_ptr<Request> Request::createRequest(const QString &xml) {
     return request;
 }
 
-std::shared_ptr<Request> Request::createInstance(QString type) {
-    if (type == "GetClients") return std::shared_ptr<Request>(new GetClientsRequest());
+std::shared_ptr<requests::Request> requests::Request::createInstance(QString type) {
+    if (type == "GetClients") return std::shared_ptr<requests::Request>(new GetClientsRequest());
     return nullptr;
 }
 
-const QString &Request::getType() const { return type; }
-void Request::setType(const QString &type) { Request::type = type; }
+const QString &requests::Request::getType() const { return type; }
 
-Request::Request(const QString &type):type(type) {
+void requests::Request::setType(const QString &type) { requests::Request::type = type; }
+
+requests::Request::Request(const QString &type) : type(type) {
 
 }
 

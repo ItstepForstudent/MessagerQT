@@ -18,7 +18,7 @@ class ChatUnit:public QObject {
 
 
 
-    std::shared_ptr<Response> getClientsRequestProcessing(std::shared_ptr<Request>);
+    std::shared_ptr<responces::Response> getClientsRequestProcessing(std::shared_ptr<requests::Request>);
 
 
 public:
@@ -31,7 +31,7 @@ public:
 
 
 private slots:
-    void recognizeRequest(std::shared_ptr<Request>,std::shared_ptr<Response>&);
+    void recognizeRequest(std::shared_ptr<requests::Request>,std::shared_ptr<responces::Response>&);
 };
 
 

@@ -4,19 +4,19 @@
 
 #include "Response.h"
 #include "responces/GetClientsResponse.h"
-Response::Response(const QString &type) :type(type){
+responces::Response::Response(const QString &type) :type(type){
 
 }
 
-const QString &Response::getType() const {
+const QString &responces::Response::getType() const {
     return type;
 }
 
-void Response::setType(const QString &type) {
+void responces::Response::setType(const QString &type) {
     Response::type = type;
 }
 
-const QString Response::toXML() const {
+const QString responces::Response::toXML() const {
     QString data;
     QXmlStreamWriter streamWriter(&data);
     streamWriter.setAutoFormatting(false);
@@ -37,7 +37,7 @@ const QString Response::toXML() const {
     return data;
 }
 
-std::shared_ptr<Response> Response::createResponse(const QString &xml) {
+std::shared_ptr<responces::Response> responces::Response::fromXML(const QString &xml) {
     QXmlStreamReader reader(xml);
     std::shared_ptr<Response> response;
     if (!reader.readNextStartElement()) return std::shared_ptr<Response>(nullptr);
@@ -46,7 +46,7 @@ std::shared_ptr<Response> Response::createResponse(const QString &xml) {
             if (reader.name() == "type")
                 response = Response::createInstance(reader.readElementText());
             else if (reader.name() == "data") {
-                if (response == nullptr) return std::shared_ptr<Response>(nullptr);
+                if (response == nullptr) return std::shared_ptr<responces::Response>(nullptr);
                 response->readData(&reader);
             } else
                 reader.skipCurrentElement();
@@ -55,10 +55,10 @@ std::shared_ptr<Response> Response::createResponse(const QString &xml) {
     return response;
 }
 
-std::shared_ptr<Response> Response::createInstance(QString type) {
+std::shared_ptr<responces::Response> responces::Response::createInstance(QString type) {
     if(type == "GetClients")
-        return std::shared_ptr<Response>(new GetClientsResponse());
-    return std::shared_ptr<Response>();
+        return std::shared_ptr<responces::Response>(new GetClientsResponse());
+    return std::shared_ptr<responces::Response>();
 }
 
 

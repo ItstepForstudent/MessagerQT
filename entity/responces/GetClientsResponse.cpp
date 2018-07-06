@@ -4,13 +4,13 @@
 
 #include "GetClientsResponse.h"
 
-GetClientsResponse::GetClientsResponse() : Response("GetClients") {}
+responces::GetClientsResponse::GetClientsResponse() : Response("GetClients") {}
 
-void GetClientsResponse::addClient(std::shared_ptr<Client> client) {
+void responces::GetClientsResponse::addClient(std::shared_ptr<Client> client) {
     this->clients.append(client);
 }
 
-void GetClientsResponse::writeData(QXmlStreamWriter *writer) const {
+void responces::GetClientsResponse::writeData(QXmlStreamWriter *writer) const {
     writer->writeStartElement("clients");
     for (auto client:this->clients){
         writer->writeStartElement("client");
@@ -21,7 +21,7 @@ void GetClientsResponse::writeData(QXmlStreamWriter *writer) const {
     writer->writeEndElement();
 }
 
-void GetClientsResponse::readData(QXmlStreamReader *reader) {
+void responces::GetClientsResponse::readData(QXmlStreamReader *reader) {
     if(reader->readNextStartElement()){
         if(reader->name() == "clients")
             while(reader->readNextStartElement()){

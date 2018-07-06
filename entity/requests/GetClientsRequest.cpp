@@ -4,13 +4,13 @@
 
 #include "GetClientsRequest.h"
 
-GetClientsRequest::GetClientsRequest() : Request("GetClients") {}
+requests::GetClientsRequest::GetClientsRequest() : Request("GetClients") {}
 
-void GetClientsRequest::writeData(QXmlStreamWriter *writer) const {
+void requests::GetClientsRequest::writeData(QXmlStreamWriter *writer) const {
     writer->writeTextElement("name",name);
 }
 
-void GetClientsRequest::readData(QXmlStreamReader *reader) {
+void requests::GetClientsRequest::readData(QXmlStreamReader *reader) {
     if(reader->readNextStartElement()){
         if(reader->name() == "name")
             this->name = reader->readElementText();
@@ -19,11 +19,11 @@ void GetClientsRequest::readData(QXmlStreamReader *reader) {
     }
 }
 
-void GetClientsRequest::setName(const QString &name) {
+void requests::GetClientsRequest::setName(const QString &name) {
     GetClientsRequest::name = name;
 }
 
-const QString &GetClientsRequest::getName() const {
+const QString &requests::GetClientsRequest::getName() const {
     return name;
 }
 

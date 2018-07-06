@@ -16,14 +16,14 @@ namespace executors {
 
     class IRequestExecutor {
     protected:
-        ChatUnit* unit;
+        ChatUnit *unit;
     public:
         explicit IRequestExecutor(ChatUnit *);
-        virtual std::shared_ptr<Response> execute(std::shared_ptr<Request>)=0;
+
+        virtual std::shared_ptr<responces::Response> execute(std::shared_ptr<requests::Request>)=0;
     };
 
 
-    std::shared_ptr<IRequestExecutor> createRequestExecutor(const QString &,ChatUnit*);
-
-#endif //QTMESSAGER_REQUESTEXECUTOR_H
+    std::shared_ptr<IRequestExecutor> createRequestExecutor(const QString &, ChatUnit *);
 }
+#endif //QTMESSAGER_REQUESTEXECUTOR_H

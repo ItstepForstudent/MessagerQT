@@ -6,7 +6,7 @@
 #include "GetClientsExeutor.h"
 
 std::shared_ptr<executors::IRequestExecutor> executors::createRequestExecutor(const QString &type, ChatUnit* unit) {
-    if(type=="GetClient") return std::shared_ptr<IRequestExecutor>(new GetClientsExeutor(unit));
+    if(type=="GetClient") return std::shared_ptr<IRequestExecutor>(new executors::GetClientsExeutor(unit));
     return std::shared_ptr<IRequestExecutor>();
 }
 

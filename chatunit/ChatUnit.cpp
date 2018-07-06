@@ -14,28 +14,19 @@ ChatUnit::ChatUnit(QObject *parent) : QObject(parent) {
 
     connect(
             this->server,
-            SIGNAL(incomingRequest(std::shared_ptr<Request>,std::shared_ptr<Response>&)),
+            SIGNAL(incomingRequest(std::shared_ptr<requests::Request>,std::shared_ptr<responces::Response>&)),
             this,
-            SLOT(recognizeRequest(std::shared_ptr<Request>,std::shared_ptr<Response>&)),
+            SLOT(recognizeRequest(std::shared_ptr<requests::Request>,std::shared_ptr<responces::Response>&)),
             Qt::DirectConnection
     );
 }
 
-void ChatUnit::recognizeRequest(std::shared_ptr<Request> request, std::shared_ptr<Response> &response) {
+void ChatUnit::recognizeRequest(std::shared_ptr<requests::Request> request, std::shared_ptr<responces::Response> &response) {
     const QString &type = request->getType();
     std::shared_ptr<executors::IRequestExecutor> executor = executors::createRequestExecutor(type,this);
     response = executor->execute(request);
 }
 
-std::shared_ptr<Response> ChatUnit::getClientsRequestProcessing(std::shared_ptr<Request> _request) {
-    auto request = reinterpret_cast<typename std::shared_ptr<GetClientsRequest>::element_type*>(_request.get());
-    std::shared_ptr<GetClientsResponse> response (new GetClientsResponse());
-
-
-
-
-    return std::shared_ptr<Response>();
-}
 
 void ChatUnit::setClientList(const QList<std::shared_ptr<Client>> &clientList) {
     ChatUnit::clientList = clientList;

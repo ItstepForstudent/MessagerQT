@@ -9,18 +9,20 @@
 #include "../Response.h"
 #include "../Client.h"
 
-class GetClientsResponse: public Response {
-    QList<std::shared_ptr<Client>> clients;
-public:
-    void addClient(std::shared_ptr<Client> client);
-    GetClientsResponse();
+namespace responces {
+    class GetClientsResponse : public Response {
+        QList<std::shared_ptr<Client>> clients;
+    public:
+        void addClient(std::shared_ptr<Client> client);
 
-protected:
-    void readData(QXmlStreamReader *reader) override;
+        GetClientsResponse();
 
-    void writeData(QXmlStreamWriter *writer) const override;
+    protected:
+        void readData(QXmlStreamReader *reader) override;
 
-};
+        void writeData(QXmlStreamWriter *writer) const override;
 
+    };
 
+}
 #endif //QTMESSAGER_GETCLIENTSRESPONSE_H

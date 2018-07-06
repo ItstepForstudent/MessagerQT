@@ -8,29 +8,32 @@
 
 #include <QObject>
 #include <QXmlStreamWriter>
+namespace responces{
+    class Response {
+        QString type;
+    public:
+        Response(const QString &type);
 
-class Response{
-    QString type;
-public:
-    Response( const QString &type);
+        const QString &getType() const;
 
-    const QString &getType() const;
+        void setType(const QString &type);
 
-    void setType(const QString &type);
-
-    const QString toXML() const;
+        const QString toXML() const;
 
 
-    static std::shared_ptr<Response> createResponse(const QString& xml);
+        static std::shared_ptr<Response> fromXML(const QString &xml);
 
-    virtual ~Response()= default;
+        virtual ~Response() = default;
 
-protected:
-    virtual void writeData(QXmlStreamWriter* writer) const = 0;
-    virtual void readData(QXmlStreamReader* reader) = 0;
+    protected:
+        virtual void writeData(QXmlStreamWriter *writer) const = 0;
 
-    static std::shared_ptr<Response> createInstance(QString type);
-};
+        virtual void readData(QXmlStreamReader *reader) = 0;
+
+        static std::shared_ptr<Response> createInstance(QString type);
+    };
+}
+
 
 
 #endif //QTMESSAGER_RESPONSE_H

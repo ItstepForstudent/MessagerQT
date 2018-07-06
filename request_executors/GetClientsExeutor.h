@@ -8,10 +8,11 @@
 #include "IRequestExecutor.h"
 
 namespace executors {
-    class GetClientsExeutor:IRequestExecutor {
+    class GetClientsExeutor : public IRequestExecutor {
     public:
         explicit GetClientsExeutor(ChatUnit *);
-        std::shared_ptr<Response> execute(std::shared_ptr<Request> ptr) override;
+
+        std::shared_ptr<responces::Response> execute(std::shared_ptr<requests::Request> ptr) override;
     };
 }
 
