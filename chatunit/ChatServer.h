@@ -15,6 +15,9 @@ class ChatServer :public QObject {
     Q_OBJECT
     QTcpServer *tcpServer;
     QList<Client*> clients;
+
+    void sendToClient(QString xmldata,QTcpSocket* tcpSocket)
+
 public:
     ChatServer(QObject* parent=0);
 

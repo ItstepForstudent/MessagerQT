@@ -36,6 +36,7 @@ void ChatServer::inputConnecting() {
 //    socket->close();
 }
 
+
 void ChatServer::readingClient() {
     QTcpSocket* pClientSocket = (QTcpSocket*)sender();
     QDataStream in(pClientSocket);
@@ -61,15 +62,19 @@ void ChatServer::readingClient() {
     std::shared_ptr<responces::Response> response = nullptr;
     incomingRequest(request,response);
 
+    //send responce
+    sendToClient(response->toXML(),pClientSocket);
+    pClientSocket->disconnect();
 
-    //TODO::send response to client
+}
 
-    
+void ChatServer::sendToClient(QString xmldata, QTcpSocket *tcpSocket) {
+    QByteArray  arrBlock;
+    QDataStream out(&arrBlock, QIODevice::WriteOnly);
+    out.setVersion(QDataStream::Qt_5_11);
+    out << quint32(0) << xmldata;
+    out.device()->seek(0);
+    out << quint16(arrBlock.size() - sizeof(quint32));
 
-
-
-
-//        sendToClient(pClientSocket,
-//                     "Server Response: Received \"" + str + "\""
-//        );
+    tcpSocket->write(arrBlock);
 }
