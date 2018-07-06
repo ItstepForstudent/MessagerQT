@@ -11,6 +11,7 @@
 #include <QXmlStreamWriter>
 #include <QXmlStreamReader>
 #include <QHostAddress>
+#include <memory>
 
 
 namespace requests{

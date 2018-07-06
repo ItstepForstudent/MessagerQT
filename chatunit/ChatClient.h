@@ -5,7 +5,7 @@
 #ifndef QTMESSAGER_CHATCLIENT_H
 #define QTMESSAGER_CHATCLIENT_H
 
-
+#include <memory>
 class ChatClient {
 
 };

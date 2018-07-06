@@ -9,6 +9,7 @@
 #include <QtGlobal>
 #include "ChatServer.h"
 #include "ChatClient.h"
+#include <memory>
 
 class ChatUnit:public QObject {
     Q_OBJECT
