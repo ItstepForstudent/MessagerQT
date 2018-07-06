@@ -26,9 +26,8 @@ public:
     static const quint16 PORT;
 
     void setClientList(const QList<std::shared_ptr<Client>> &clientList);
-
     const QList<std::shared_ptr<Client>> &getClientList() const;
-
+    void addClient(const std::shared_ptr<Client>&);
 
 private slots:
     void recognizeRequest(std::shared_ptr<requests::Request>,std::shared_ptr<responces::Response>&);

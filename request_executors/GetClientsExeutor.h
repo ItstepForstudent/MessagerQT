@@ -11,7 +11,6 @@ namespace executors {
     class GetClientsExeutor : public IRequestExecutor {
     public:
         explicit GetClientsExeutor(ChatUnit *);
-
         std::shared_ptr<responces::Response> execute(std::shared_ptr<requests::Request> ptr) override;
     };
 }

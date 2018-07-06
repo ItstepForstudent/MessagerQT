@@ -55,4 +55,12 @@ requests::Request::Request(const QString &type) : type(type) {
 
 }
 
+const QHostAddress &requests::Request::getAddress() const {
+    return address;
+}
+
+void requests::Request::setAddress(const QHostAddress &address) {
+    Request::address = address;
+}
+
 

@@ -56,12 +56,13 @@ void ChatServer::readingClient() {
     QString data;
     in>>data;
 
-   // qDebug()<<data;
-
     std::shared_ptr<requests::Request> request = requests::Request::fromXML(data);
+    request->setAddress(pClientSocket->peerAddress());
     std::shared_ptr<responces::Response> response = nullptr;
     incomingRequest(request,response);
 
+
+    //TODO::send response to client
 
     
 

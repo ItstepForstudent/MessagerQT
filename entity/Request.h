@@ -10,11 +10,18 @@
 #include <QObject>
 #include <QXmlStreamWriter>
 #include <QXmlStreamReader>
+#include <QHostAddress>
 
 
 namespace requests{
     class Request{
         QString type;
+        QHostAddress address;
+    public:
+        const QHostAddress &getAddress() const;
+
+        void setAddress(const QHostAddress &address);
+
     public:
         const QString &getType() const;
         void setType(const QString &type);

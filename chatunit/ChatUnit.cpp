@@ -36,6 +36,10 @@ const QList<std::shared_ptr<Client>> &ChatUnit::getClientList() const {
     return clientList;
 }
 
+void ChatUnit::addClient(const std::shared_ptr<Client> &c) {
+    this->clientList.append(c);
+}
+
 
 
 
