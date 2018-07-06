@@ -7,6 +7,8 @@ const quint16 ChatUnit::PORT=8081;
 
 ChatUnit::ChatUnit(QObject *parent) : QObject(parent) {
     this->server = new ChatServer(this);
+    this->client = new ChatClient("localhost",8081);
+    this->client->show();
 
     connect(
             this->server,

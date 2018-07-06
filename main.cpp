@@ -1,5 +1,6 @@
 #include "dialog.h"
 #include <QApplication>
+#include<memory>
 #include "chatunit/ChatUnit.h"
 #include "entity/Request.h"
 #include "entity/requests/GetClientsRequest.h"
@@ -36,14 +37,10 @@ void testing(){
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    Dialog w;
-    w.show();
+    //Dialog w;
+    //w.show();
 
-   //testing();
-
-
-
-
+   testing();
 
    ChatUnit unit;
     return a.exec();

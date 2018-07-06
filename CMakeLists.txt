@@ -1,12 +1,18 @@
 set(PROJECTNAME QTMessager)
 
+set(PROJECTNAME QTMessager)
+
 cmake_minimum_required(VERSION 3.5)
 project(${PROJECTNAME})
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-set(CMAKE_PREFIX_PATH "/Users/virus/Qt/5.11.1/clang_64/")
+# -std=c++11
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+set(CMAKE_PREFIX_PATH "D:/Program/Qt/5.11.1/msvc2015/")
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
-
+set(CMAKE_CONFIGURATION_TYPES "Release" CACHE STRING "" FORCE)
+set(CMAKE_CONFIGURATION_TYPES "Debug" CACHE STRING "" FORCE)
+set(CMAKE_BUILD_TYPE Release)
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Network REQUIRED)
 find_package(Qt5Widgets REQUIRED)
@@ -14,6 +20,7 @@ find_package(Qt5Gui REQUIRED)
 find_package(Qt5Sql REQUIRED)
 find_package(Qt5Xml REQUIRED)
 find_package(Qt5PrintSupport REQUIRED)
+
 
 set(SOURCE_FILES
         main.cpp

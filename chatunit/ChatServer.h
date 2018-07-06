@@ -17,9 +17,11 @@ class ChatServer :public QObject {
     QList<Client*> clients;
 public:
     ChatServer(QObject* parent=0);
+    void ChatServer::sendToClient(QTcpSocket* pSocket, const QString& str);
 
 signals:
     void incomingRequest(std::shared_ptr<Request>,std::shared_ptr<Response>&);
+
 
 public slots:
     void inputConnecting();

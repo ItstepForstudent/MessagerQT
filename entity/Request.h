@@ -8,6 +8,7 @@
 
 #include <QString>
 #include <QObject>
+#include <memory>
 #include <QXmlStreamWriter>
 #include <QXmlStreamReader>
 
