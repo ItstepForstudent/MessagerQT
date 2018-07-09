@@ -18,6 +18,9 @@ std::shared_ptr<responces::Response> executors::GetClientsExeutor::execute(std::
         response->addClient(client);
     }
 
+    qDebug()<<request->getAddress().toString();
+    qDebug()<<request->getName();
+
     std::shared_ptr<Client> client(new Client(request->getName(),request->getAddress()));
     unit->addClient(client);
 
