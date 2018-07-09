@@ -6,6 +6,7 @@
 #define QTMESSAGER_GETCLIENTSEXEUTOR_H
 
 #include "IRequestExecutor.h"
+#include <memory>
 
 namespace executors {
     class GetClientsExeutor : public IRequestExecutor {

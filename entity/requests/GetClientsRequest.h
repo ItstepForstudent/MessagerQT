@@ -9,7 +9,7 @@
 #include <QXmlStreamWriter>
 #include <QXmlStreamReader>
 #include "../Request.h"
-
+#include <memory>
 namespace requests {
     class GetClientsRequest : public Request {
     private:

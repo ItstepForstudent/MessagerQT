@@ -10,13 +10,14 @@
 #include "../entity/Client.h"
 #include "../entity/Request.h"
 #include "../entity/Response.h"
+#include <memory>
 
 class ChatServer :public QObject {
     Q_OBJECT
     QTcpServer *tcpServer;
     QList<Client*> clients;
 
-    void sendToClient(QString xmldata,QTcpSocket* tcpSocket)
+    void sendToClient(QString xmldata,QTcpSocket* tcpSocket);
 
 public:
     ChatServer(QObject* parent=0);

@@ -8,6 +8,7 @@
 
 #include <QObject>
 #include <QXmlStreamWriter>
+#include <memory>
 namespace responces{
     class Response {
         QString type;

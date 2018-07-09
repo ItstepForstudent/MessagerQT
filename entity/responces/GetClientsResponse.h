@@ -8,7 +8,7 @@
 
 #include "../Response.h"
 #include "../Client.h"
-
+#include <memory>
 namespace responces {
     class GetClientsResponse : public Response {
         QList<std::shared_ptr<Client>> clients;
