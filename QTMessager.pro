@@ -5,7 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
-QT       += network
+QT       += network sql xml
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -27,11 +27,42 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         dialog.cpp \
-    chatunit/ChatUnit.cpp
+    chatunit/ChatUnit.cpp\
+    chatunit/ChatServer.cpp\
+    entity/Client.cpp\
+    entity/Request.cpp\
+    entity/requests/GetClientsRequest.cpp\
+    entity/responces/GetClientsResponse.cpp\
+    entity/Response.cpp\
+     chatunit/ChatClient.cpp\
+     request_executors/IRequestExecutor.cpp\
+     request_executors/GetClientsExeutor.cpp
+
+
+
+
 
 HEADERS += \
         dialog.h \
-    /chatunit/ChatUnit.h
+    chatunit/ChatUnit.h\
+    chatunit/ChatServer.h\
+    entity/Client.h\
+    entity/Request.h\
+    entity/requests/GetClientsRequest.h\
+    entity/responces/GetClientsResponse.h\
+    entity/Response.h\
+    chatunit/ChatClient.h\
+    request_executors/IRequestExecutor.h\
+    request_executors/GetClientsExeutor.h
+
+
+
+
+
+
+
+
+
 
 FORMS += \
         dialog.ui

@@ -28,9 +28,7 @@ void ChatServer::inputConnecting() {
 
 
    // clients.append(addr);
-
-
-//    socket->write("Hello client\r\n");
+   //sendToClient("Hello client",socket);
 //    socket->flush();
 //    socket->waitForBytesWritten(3000);
 //    socket->close();
