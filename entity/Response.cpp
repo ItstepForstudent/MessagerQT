@@ -4,6 +4,7 @@
 
 #include "Response.h"
 #include "responces/GetClientsResponse.h"
+#include "responces/MessageResponse.h"
 responces::Response::Response(const QString &type) :type(type){
 
 }
@@ -56,8 +57,9 @@ std::shared_ptr<responces::Response> responces::Response::fromXML(const QString 
 }
 
 std::shared_ptr<responces::Response> responces::Response::createInstance(QString type) {
-    if(type == "GetClients")
-        return std::shared_ptr<responces::Response>(new GetClientsResponse());
+    if(type == "GetClients") return std::shared_ptr<responces::Response>(new GetClientsResponse());
+    if(type == "Message") return std::shared_ptr<responces::Response>(new MessageResponse());
+
     return std::shared_ptr<responces::Response>();
 }
 

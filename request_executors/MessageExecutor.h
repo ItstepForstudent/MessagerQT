@@ -12,6 +12,7 @@ namespace executors {
     public:
         MessageExecutor(ChatUnit *);
 
+        std::shared_ptr<responces::Response> execute(std::shared_ptr<requests::Request>) override;
     };
 
 }

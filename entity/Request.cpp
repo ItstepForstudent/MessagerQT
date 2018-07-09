@@ -1,6 +1,7 @@
 #include "Request.h"
 #include <QDebug>
 #include "requests/GetClientsRequest.h"
+#include "requests/MessageRequest.h"
 
 
 const QString requests::Request::toXML() const {
@@ -44,6 +45,7 @@ std::shared_ptr<requests::Request> requests::Request::fromXML(const QString &xml
 
 std::shared_ptr<requests::Request> requests::Request::createInstance(QString type) {
     if (type == "GetClients") return std::shared_ptr<requests::Request>(new GetClientsRequest());
+    if (type == "Message") return std::shared_ptr<requests::Request>(new MessageRequest());
     return nullptr;
 }
 
