@@ -58,11 +58,11 @@ void ChatServer::readingClient() {
 
     std::shared_ptr<requests::Request> request = requests::Request::fromXML(data);
     request->setAddress(pClientSocket->peerAddress());
-    std::shared_ptr<responces::Response> response = nullptr;
+    QString response;
     incomingRequest(request,response);
 
     //send responce
-    sendToClient(response->toXML(),pClientSocket);
+    sendToClient(response,pClientSocket);
     pClientSocket->disconnect();
 
 }

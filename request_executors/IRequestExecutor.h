@@ -23,7 +23,6 @@ namespace executors {
         virtual std::shared_ptr<responces::Response> execute(std::shared_ptr<requests::Request>)=0;
     };
 
-
     std::shared_ptr<IRequestExecutor> createRequestExecutor(const QString &, ChatUnit *);
 }
 #endif //QTMESSAGER_REQUESTEXECUTOR_H

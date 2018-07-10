@@ -23,7 +23,7 @@ public:
     ChatServer(QObject* parent=0);
 
 signals:
-    void incomingRequest(std::shared_ptr<requests::Request>,std::shared_ptr<responces::Response>&);
+    void incomingRequest(std::shared_ptr<requests::Request>,QString&);
 
 public slots:
     void inputConnecting();

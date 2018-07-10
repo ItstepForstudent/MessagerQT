@@ -17,11 +17,6 @@ class ChatUnit:public QObject {
     ChatClient *client;
     QList<std::shared_ptr<Client>> clientList;
 
-
-
-    std::shared_ptr<responces::Response> getClientsRequestProcessing(std::shared_ptr<requests::Request>);
-
-
 public:
     ChatUnit(QObject* parent=0);
     static const quint16 PORT;
@@ -31,7 +26,7 @@ public:
     void addClient(const std::shared_ptr<Client>&);
 
 private slots:
-    void recognizeRequest(std::shared_ptr<requests::Request>,std::shared_ptr<responces::Response>&);
+    void recognizeRequest(std::shared_ptr<requests::Request>,QString &);
 };
 
 
