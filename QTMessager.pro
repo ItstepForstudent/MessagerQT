@@ -36,7 +36,10 @@ SOURCES += \
     entity/Response.cpp\
      chatunit/ChatClient.cpp\
      request_executors/IRequestExecutor.cpp\
-     request_executors/GetClientsExeutor.cpp
+     request_executors/GetClientsExeutor.cpp\
+      request_executors/MessageExecutor.cpp\
+      entity/requests/MessageRequest.cpp\
+      entity/responces/MessageResponse.cpp
 
 
 
@@ -53,7 +56,12 @@ HEADERS += \
     entity/Response.h\
     chatunit/ChatClient.h\
     request_executors/IRequestExecutor.h\
-    request_executors/GetClientsExeutor.h
+    request_executors/GetClientsExeutor.h\
+    request_executors/MessageExecutor.h\
+    entity/requests/MessageRequest.h\
+    entity/responces/MessageResponse.h
+
+
 
 
 
