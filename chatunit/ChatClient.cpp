@@ -7,59 +7,55 @@
 #include "ChatClient.h"
 #include "ChatUnit.h"
 
-void ChatClient::sendRequest(std::shared_ptr<requests::Request> request, std::shared_ptr<Client> client) {
-    mutex.lock();
-    this->activeRequest = std::move(request);
-    this->toClient = std::move(client);
-    if (!isRunning()) start();
-    else condition.wakeOne();
-    mutex.unlock();
+void ChatClient::sendRequest(std::shared_ptr<requests::Request> request, std::shared_ptr<Client> client,
+                             std::function<void(std::shared_ptr<responces::Response>)> onResponce) {
+    std::thread th([&]() {
+        this->run(request, client, onResponce);
+    });
+
+    th.detach();
 }
 
-ChatClient::ChatClient(QObject *parent) : QThread(parent) {
+ChatClient::ChatClient(QObject *parent) : QObject(parent) {
 
 }
 
-ChatClient::~ChatClient() {
-    mutex.lock();
-    quit = true;
-    condition.wakeOne();
-    mutex.unlock();
-    wait();
-}
+ChatClient::~ChatClient() {}
 
-void ChatClient::run() {
-
+void ChatClient::run(
+        std::shared_ptr<requests::Request> request,
+        std::shared_ptr<Client> client,
+        std::function<void(std::shared_ptr<responces::Response>)> onResponce
+) {
+    qDebug() << "Request running";
     const int TIMEOUT = 3000;
-
-    mutex.lock();
-    std::shared_ptr<Client> client = toClient;
-    std::shared_ptr<requests::Request> request = activeRequest;
-    mutex.unlock();
 
 
     QTcpSocket socket;
     socket.connectToHost(client->getAddress(), ChatUnit::PORT);
-
-    if(!socket.waitForConnected(TIMEOUT)){
+    qDebug() << client->getAddress();
+    if (!socket.waitForConnected(TIMEOUT)) {
         //TODO:: send error signal
+        qDebug() << "Connect timeout";
         return;
     }
+    qDebug() << "Connected";
 
     //Send data to server:
     QString xmlData = request->toXML();
 
     QByteArray data;
-    QDataStream out(&data,QIODevice::WriteOnly);
+    QDataStream out(&data, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_5_11);
-    out<<qint32(0)<<xmlData;
+    out << qint32(0) << xmlData;
     out.device()->seek(0);
-    out<<qint32(data.size() - sizeof(qint32));
+    out << qint32(data.size() - sizeof(qint32));
 
     socket.write(data);
 
-    if(!socket.waitForReadyRead(TIMEOUT)){
+    if (!socket.waitForReadyRead(TIMEOUT)) {
         //TODO:: emit error
+        qDebug() << "Send data error";
         return;
     }
 
@@ -69,7 +65,7 @@ void ChatClient::run() {
     in.setVersion(QDataStream::Qt_5_11);
 
     qint32 size;
-    in>>size;
+    in >> size;
 
     if (socket.bytesAvailable() < sizeof(quint32)) {
         //TODO:: emit error
@@ -81,20 +77,12 @@ void ChatClient::run() {
         return;
     }
 
-    in>>data;
+    in >> data;
 
     std::shared_ptr<responces::Response> responce = responces::Response::fromXML(data);
 
-    mutex.lock();
-    emit onResponse(responce);
 
-    condition.wait(&mutex);
-    toClient = client;
-    activeRequest = request;
-    mutex.unlock();
-
-
-
+    onResponce(responce);
 
 
 }

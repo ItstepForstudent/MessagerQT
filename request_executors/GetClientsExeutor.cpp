@@ -13,7 +13,7 @@ std::shared_ptr<responces::Response> executors::GetClientsExeutor::execute(std::
 
     auto * response = new responces::GetClientsResponse();
 
-    for(const auto &client: unit->getClientList()){
+    for(const auto &client: unit->getClientsList()){
         if(client->getAddress()==request->getAddress()) continue;
         response->addClient(client);
     }
@@ -21,6 +21,7 @@ std::shared_ptr<responces::Response> executors::GetClientsExeutor::execute(std::
     qDebug()<<request->getAddress().toString();
     qDebug()<<request->getName();
 
+    unit->clientConnected(std::shared_ptr<Client>(new Client(request->getName(),request->getAddress())));
     std::shared_ptr<Client> client(new Client(request->getName(),request->getAddress()));
     unit->addClient(client);
 

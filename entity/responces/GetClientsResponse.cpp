@@ -57,4 +57,12 @@ void responces::GetClientsResponse::readData(QXmlStreamReader *reader) {
 
 }
 
+const QList<std::shared_ptr<Client>> &responces::GetClientsResponse::getClients() const {
+    return clients;
+}
+
+void responces::GetClientsResponse::setClients(const QList<std::shared_ptr<Client>> &clients) {
+    this->clients = clients;
+}
+
 

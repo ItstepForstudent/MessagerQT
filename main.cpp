@@ -1,6 +1,7 @@
 #include "dialog.h"
 #include <QApplication>
 #include "chatunit/ChatUnit.h"
+
 #include "entity/Request.h"
 #include "entity/requests/GetClientsRequest.h"
 #include "entity/responces/GetClientsResponse.h"
@@ -28,23 +29,30 @@ void testParseXmlResponse(){
 }
 
 
+void testSendData(){
+    ChatUnit* unit = new ChatUnit();
+    unit->connectToAddress("127.0.0.1");
+
+}
+
+
 void testing(){
-    testParseXmlResponse();
+    //testParseXmlResponse();
     // testParseXMLRequest();
+    testSendData();
 }
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    Dialog w;
-    w.show();
+    //Dialog w;
+    //w.show();
 
-   //testing();
-
-
+   testing();
 
 
 
-   ChatUnit unit;
+
+   //ChatUnit unit;
     return a.exec();
 }

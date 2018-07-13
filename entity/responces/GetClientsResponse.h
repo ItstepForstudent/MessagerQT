@@ -15,6 +15,10 @@ namespace responces {
     public:
         void addClient(std::shared_ptr<Client> client);
 
+        const QList<std::shared_ptr<Client>> &getClients() const;
+
+        void setClients(const QList<std::shared_ptr<Client>> &clients);
+
         GetClientsResponse();
 
     protected:
