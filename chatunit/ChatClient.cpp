@@ -10,7 +10,10 @@
 void ChatClient::sendRequest(std::shared_ptr<requests::Request> request, std::shared_ptr<Client> client,
                              std::function<void(std::shared_ptr<responces::Response>)> onResponce) {
     std::thread th([&]() {
-        this->run(request, client, onResponce);
+        this->run(request, client, [](const std::shared_ptr<responces::Response> resp){
+            auto x=resp;
+            qDebug()<<x->toXML();
+        });
     });
 
     th.detach();
@@ -63,26 +66,32 @@ void ChatClient::run(
     //Read server responce:
     QDataStream in(&socket);
     in.setVersion(QDataStream::Qt_5_11);
-
     qint32 size;
-    in >> size;
 
     if (socket.bytesAvailable() < sizeof(quint32)) {
         //TODO:: emit error
         return;
     }
     in >> size;
+    qDebug()<<size;
     if (socket.bytesAvailable() < size) {
         //TODO:: emit error
         return;
     }
 
-    in >> data;
+    QString receivedXML;
+    in >> receivedXML;
+    qDebug()<<receivedXML;
 
-    std::shared_ptr<responces::Response> responce = responces::Response::fromXML(data);
+    std::shared_ptr<responces::Response> responce = responces::Response::fromXML(receivedXML);
 
 
     onResponce(responce);
+
+
+
+
+
 
 
 }

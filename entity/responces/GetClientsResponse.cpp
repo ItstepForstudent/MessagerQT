@@ -65,4 +65,8 @@ void responces::GetClientsResponse::setClients(const QList<std::shared_ptr<Clien
     this->clients = clients;
 }
 
+responces::GetClientsResponse::~GetClientsResponse() {
+    qDebug()<<"Die";
+}
+
 

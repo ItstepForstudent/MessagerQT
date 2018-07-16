@@ -17,6 +17,8 @@ namespace responces {
 
         const QList<std::shared_ptr<Client>> &getClients() const;
 
+        ~GetClientsResponse() override;
+
         void setClients(const QList<std::shared_ptr<Client>> &clients);
 
         GetClientsResponse();

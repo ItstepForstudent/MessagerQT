@@ -69,12 +69,13 @@ void ChatServer::readingClient() {
 }
 
 void ChatServer::sendToClient(QString xmldata, QTcpSocket *tcpSocket) {
+    qDebug()<<"send:"<<xmldata;
     QByteArray  arrBlock;
     QDataStream out(&arrBlock, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_5_11);
     out << quint32(0) << xmldata;
     out.device()->seek(0);
-    out << quint16(arrBlock.size() - sizeof(quint32));
-
+    out << quint32(arrBlock.size() - sizeof(quint32));
     tcpSocket->write(arrBlock);
+    tcpSocket->flush();
 }

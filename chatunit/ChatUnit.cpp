@@ -40,7 +40,7 @@ QList<std::shared_ptr<Client>> &ChatUnit::getClientsList() {
 void ChatUnit::sendMessage(std::shared_ptr<Client> client, QString msg) {
     auto req = std::shared_ptr<requests::MessageRequest>(new requests::MessageRequest());
     req->setMessage(msg);
-    this->client->sendRequest(req, client, [](std::shared_ptr<responces::Response> resp) {
+    this->client->sendRequest(req, client, [&](std::shared_ptr<responces::Response> resp) {
         emit onMessageSended();
     });
 }
@@ -55,7 +55,7 @@ void ChatUnit::connectToAddress(QString address) {
     request->setName(this->name);
     this->client->sendRequest(
             request, std::shared_ptr<Client>(new Client("", QHostAddress(address))),
-            [](std::shared_ptr<responces::Response> resp) {
+            [&](std::shared_ptr<responces::Response> resp) {
                 this->clientList = reinterpret_cast<responces::GetClientsResponse &>(*resp).getClients();
                 emit onLoadingClientList();
             }
